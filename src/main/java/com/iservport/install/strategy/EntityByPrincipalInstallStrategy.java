@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author mauriciofernandesdecastro
  */
 public class EntityByPrincipalInstallStrategy 
-	extends AbstractKeyTypeEntityInstallStrategy
+	extends AbstractCustomTypeEntityInstallStrategy
 {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EntityByPrincipalInstallStrategy.class);

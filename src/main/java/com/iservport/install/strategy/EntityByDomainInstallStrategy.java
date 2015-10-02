@@ -7,7 +7,6 @@ import org.helianto.core.domain.Entity;
 import org.helianto.core.domain.Identity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 /**
  * Entity prototype generation by domain.
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Service;
  * @author Eldevan Nery Junior.
  */
 public class EntityByDomainInstallStrategy 
-	extends AbstractKeyTypeEntityInstallStrategy
+	extends AbstractCustomTypeEntityInstallStrategy
 {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EntityByDomainInstallStrategy.class);
