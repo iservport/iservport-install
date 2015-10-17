@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.helianto.core.domain.Entity;
 import org.helianto.core.domain.Identity;
+import org.helianto.core.domain.Signup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,7 @@ public class EntityByDomainInstallStrategy
 	 * @param params
 	 */
 	public List<Entity> generateEntityPrototypes(Object... params) {
-		if (params!=null && params.length>0 && params[0] instanceof Identity) {
+		if (params!=null && params.length>0 && params[0] instanceof Signup) {
 			Identity identity = (Identity) params[0];
 			List<Entity> entityList = new ArrayList<>();
 			Entity prototype = createPrototype(identity.getOptionalSourceAlias(), "", 'C');

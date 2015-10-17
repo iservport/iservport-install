@@ -13,7 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.ClassPathResource;
 
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonParser.Feature;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -27,9 +30,9 @@ public class KeyTypeInstallService
 	
 	private static final String KEY_TYPE_PATH_FILE = "/META-INF/data/keyType/";
 	
-	@Inject
-	private ObjectMapper mapper;
-	
+//	@Inject
+//	private ObjectMapper mapper;
+//	
 	@Inject
 	private KeyTypeRepository keyTypeRepository;
 	
@@ -69,6 +72,10 @@ public class KeyTypeInstallService
 		String contextName = entityInstallStrategy.getContextName();
 		logger.debug("Creating Key types for {}.", contextName);
 		ClassPathResource resource =  new ClassPathResource(KEY_TYPE_PATH_FILE+"keyTypes.json");
+		ObjectMapper mapper = new ObjectMapper(
+				new JsonFactory()
+				.configure(Feature.ALLOW_COMMENTS, true))
+				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ArrayList<KeyType> user = 
 				mapper.readValue(resource.getFile(), TypeFactory.defaultInstance().constructCollectionType(List.class,  
 				KeyType.class));
