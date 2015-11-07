@@ -22,6 +22,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.iservport.install.strategy.AbstractCustomTypeEntityInstallStrategy;
 
+/**
+ * Key type install service.
+ * 
+ * @author mauriciofernandesdecastro
+ */
 public class KeyTypeInstallService 
 	implements InitializingBean
 {
@@ -30,9 +35,6 @@ public class KeyTypeInstallService
 	
 	private static final String KEY_TYPE_PATH_FILE = "/META-INF/data/keyType/";
 	
-//	@Inject
-//	private ObjectMapper mapper;
-//	
 	@Inject
 	private KeyTypeRepository keyTypeRepository;
 	

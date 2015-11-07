@@ -28,18 +28,6 @@ public class EntityInstallStrategyTests {
 	}
 
 	/**
-	 * Uma identidade é requerida e o protótipo gerado pelo domínio associado à identidade.
-	 */
-	@Test
-	public void domain() {
-		EntityInstallStrategy strategy = new EntityByDomainInstallStrategy();
-		Identity identity = new Identity("principal");
-		identity.setOptionalSourceAlias("ALIAS");
-		List<Entity> entityList = strategy.generateEntityPrototypes(identity);
-		assertEquals("ALIAS", entityList.get(0).getAlias());
-	}
-
-	/**
 	 * Um formulário é requerido e o protótipo gerado pelo cnpj associado à identidade.
 	 */
 	@Test
