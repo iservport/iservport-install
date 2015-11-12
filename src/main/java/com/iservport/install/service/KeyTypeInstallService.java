@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.helianto.core.domain.KeyType;
 import org.helianto.core.repository.KeyTypeRepository;
+import org.helianto.install.service.AbstractEntityInstallStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -20,7 +21,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.iservport.install.strategy.AbstractCustomTypeEntityInstallStrategy;
 
 /**
  * Key type install service.
@@ -39,7 +39,7 @@ public class KeyTypeInstallService
 	private KeyTypeRepository keyTypeRepository;
 	
 	@Inject
-	private AbstractCustomTypeEntityInstallStrategy entityInstallStrategy;
+	private AbstractEntityInstallStrategy entityInstallStrategy;
 	
 	/**
 	 * Brasil.
