@@ -1,11 +1,15 @@
 package com.iservport.install.service;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.helianto.core.domain.KeyType;
 import org.helianto.core.repository.KeyTypeRepository;
 import org.helianto.install.service.AbstractEntityInstallStrategy;
@@ -73,13 +77,22 @@ public class KeyTypeInstallService
 	public void afterPropertiesSet() throws JsonParseException, JsonMappingException, IOException{
 		String contextName = entityInstallStrategy.getContextName();
 		logger.debug("Creating Key types for {}.", contextName);
-		ClassPathResource resource =  new ClassPathResource(KEY_TYPE_PATH_FILE+"keyTypes.json");
+		ClassPathResource classPathResource = new ClassPathResource(KEY_TYPE_PATH_FILE+"keyTypes.json");
+
+        InputStream inputStream = classPathResource.getInputStream();
+        File somethingFile = File.createTempFile("keyTypes", ".json");
+        try {
+            FileUtils.copyInputStreamToFile(inputStream, somethingFile);
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
+		
 		ObjectMapper mapper = new ObjectMapper(
 				new JsonFactory()
 				.configure(Feature.ALLOW_COMMENTS, true))
 				.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		ArrayList<KeyType> user = 
-				mapper.readValue(resource.getFile(), TypeFactory.defaultInstance().constructCollectionType(List.class,  
+				mapper.readValue(somethingFile, TypeFactory.defaultInstance().constructCollectionType(List.class,  
 				KeyType.class));
 		for (KeyType keyType : user) {
 			logger.debug("Search ketType to context {} with keyCode {}.", contextName, keyType.getKeyCode());
